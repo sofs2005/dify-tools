@@ -1,0 +1,41 @@
+identity:
+  name: template
+  author: flowerwine
+  label:
+    en_US: HTML Template Rendering
+    zh_Hans: HTML 模板渲染
+description:
+  human:
+    en_US: Render the provided parameters to HTML format
+    zh_Hans: 将提供的参数渲染为 HTML 格式
+  llm: 将提供的参数渲染为 HTML 格式
+parameters:
+  - name: template_id
+    type: select
+    required: true
+    form: form
+    label:
+      en_US: Template ID
+      zh_Hans: 模板ID
+    human_description:
+      en_US: Select article template
+      zh_Hans: 选择要使用的文章模板
+    options:
+      - label: 
+          zh_Hans: Hello Github 模板
+          en_US: Hello Github Template
+        value: hellogithub
+  
+  - name: template_params
+    type: string
+    required: true
+    form: llm
+    label:
+      en_US: Template Parameters (JSON)
+      zh_Hans: 模板参数 (JSON)
+    human_description:
+      en_US: Parameters to be rendered in the template (in JSON format)
+      zh_Hans: 需要在模板中渲染的参数（JSON 格式）
+extra:
+  python:
+    source: tools/template.py

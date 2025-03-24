@@ -1,0 +1,52 @@
+version: 0.0.1
+type: plugin
+author: flowerwine
+name: auto
+label:
+  en_US: auto
+  ja_JP: auto
+  zh_Hans: auto
+  pt_BR: auto
+description:
+  en_US: 自动化
+  ja_JP: 自动化
+  zh_Hans: 自动化
+  pt_BR: 自动化
+icon: icon.svg
+resource:
+  memory: 268435456
+  permission:
+    tool:
+      enabled: true
+    model:
+      enabled: true
+      llm: true
+      text_embedding: true
+      rerank: true
+      tts: true
+      speech2text: true
+      moderation: true
+    node:
+      enabled: true
+    endpoint:
+      enabled: true
+    app:
+      enabled: true
+    storage:
+      enabled: true
+      size: 1048576
+plugins:
+  tools:
+    - provider/auto.yaml
+meta:
+  version: 0.0.1
+  arch:
+    - amd64
+    - arm64
+  runner:
+    language: python
+    version: "3.12"
+    entrypoint: main
+created_at: 2025-03-20T18:31:50.2804757+08:00
+privacy: PRIVACY.md
+verified: false

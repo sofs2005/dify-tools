@@ -1,0 +1,19 @@
+identity:
+  author: flowerwine
+  name: auto
+  label:
+    en_US: Auto
+    zh_Hans: 自动化
+    pt_BR: Auto
+  description:
+    en_US: 自动化
+    zh_Hans: 自动化
+    pt_BR: 自动化
+  icon: guan.webp
+tools:
+  - tools/template.yaml
+  - tools/wechat.yaml
+  - tools/baijiahao.yaml
+extra:
+  python:
+    source: provider/auto.py

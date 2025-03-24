@@ -1,0 +1,146 @@
+identity:
+  name: wechat
+  author: flowerwine
+  label:
+    en_US: WeChat Publisher
+    zh_Hans: 微信公众号发布
+description:
+  human:
+    en_US: Publish article to WeChat Official Account
+    zh_Hans: 发布文章到微信公众号
+  llm: 发布文章到微信公众号
+parameters:
+  - name: wechat_app_id
+    type: string
+    required: true
+    form: form
+    label:
+      en_US: WeChat App ID
+      zh_Hans: 微信公众号 AppID
+    human_description:
+      en_US: Enter your WeChat Official Account AppID
+      zh_Hans: 输入你的微信公众号 AppID
+  
+  - name: wechat_app_secret
+    type: string
+    required: true
+    form: form
+    label:
+      en_US: WeChat App Secret
+      zh_Hans: 微信公众号 AppSecret
+    human_description:
+      en_US: Enter your WeChat Official Account AppSecret
+      zh_Hans: 输入你的微信公众号 AppSecret
+    is_secret: true
+    
+  - name: title
+    type: string
+    required: true
+    form: llm
+    label:
+      en_US: Article Title
+      zh_Hans: 文章标题
+    human_description:
+      en_US: Enter article title
+      zh_Hans: 输入文章标题
+  
+  - name: content
+    type: string
+    required: true
+    form: llm
+    label:
+      en_US: Content
+      zh_Hans: 文章内容
+    human_description:
+      en_US: Enter article content
+      zh_Hans: 输入文章内容
+  
+  - name: image_url
+    type: string
+    required: true
+    form: llm
+    label:
+      en_US: Cover Image URL
+      zh_Hans: 封面图片链接
+    human_description:
+      en_US: Enter cover image URL (optional)
+      zh_Hans: 输入封面图片链接（可选）
+
+  - name: need_open_comment
+    type: select
+    required: false
+    form: form
+    label:
+      en_US: Open Comment
+      zh_Hans: 是否开放评论
+    human_description:
+      en_US: Allow readers to comment on the article
+      zh_Hans: 允许读者评论文章
+    default: "0"
+    options:
+      - label:
+          zh_Hans: 不开放评论
+          en_US: No Comments
+        value: 0
+      - label:
+          zh_Hans: 开放评论
+          en_US: Allow Comments
+        value: 1
+
+  - name: only_fans_can_comment
+    type: select
+    required: false
+    form: form
+    label:
+      en_US: Only Fans Can Comment
+      zh_Hans: 仅粉丝可评论
+    human_description:
+      en_US: Only fans can comment on the article
+      zh_Hans: 仅粉丝可以评论文章
+    default: "0"
+    options:
+      - label:
+          zh_Hans: 所有人可评论
+          en_US: Everyone Can Comment
+        value: 0
+      - label:
+          zh_Hans: 仅粉丝可评论
+          en_US: Only Fans Can Comment
+        value: 1
+
+  - name: content_source_url
+    type: string
+    required: false
+    form: form
+    label:
+      en_US: Source URL
+      zh_Hans: 原文链接
+    human_description:
+      en_US: Original article URL (optional)
+      zh_Hans: 原文链接（可选）
+    default: ""
+
+  - name: auto_publish
+    type: select
+    required: false
+    form: form
+    label:
+      en_US: Auto Publish
+      zh_Hans: 是否自动发布
+    human_description:
+      en_US: Whether to publish the article automatically
+      zh_Hans: 是否自动发布文章（不自动发布则存入草稿箱）
+    default: "0"
+    options:
+      - label:
+          zh_Hans: 存入草稿箱
+          en_US: Save as Draft
+        value: "0"
+      - label:
+          zh_Hans: 自动发布
+          en_US: Auto Publish
+        value: "1"
+
+extra:
+  python:
+    source: tools/wechat.py 
