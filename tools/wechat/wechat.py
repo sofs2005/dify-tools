@@ -2,7 +2,7 @@ from collections.abc import Generator
 from typing import Any
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
-from .weixin_publisher import WeixinPublisher
+from tools.wechat.weixin_publisher import WeixinPublisher
 
 class WeChatTool(Tool):
     def __init__(self, **kwargs):
@@ -37,7 +37,8 @@ class WeChatTool(Tool):
             yield ToolInvokeMessage(
                 type="text",
                 message={
-                    "text": f"文章《{title}》{status}\n文章ID：{result['weixin_media_id']}"
+                    "text": f"文章《{title}》{status}\n文章ID：{result['weixin_media_id']}",
+                    "json": result
                 }
             )
         except Exception as e:

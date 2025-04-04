@@ -1,0 +1,81 @@
+<section style="max-width: 100%; margin: 0 auto; background: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Microsoft YaHei', sans-serif;">
+    {%- for item in items -%}
+    <section style="padding: 15px 15px 12px;">
+        {# 整体布局：左右两栏 #}
+        <section style="display: flex;">
+            {# 左栏：头像 #}
+            <section style="flex-shrink: 0; margin-right: 10px;">
+                <img src="{{ item.avatar }}" alt="avatar" style="width: 40px; height: 40px; border-radius: 2px;">
+            </section>
+
+            {# 右栏：作者名和内容 #}
+            <section style="flex: 1;">
+                {# 作者名 #}
+                <section style="margin-bottom: 8px;">
+                    <span style="font-size: 16px; font-weight: 600; color: #576b95;">
+                        {{- item.author -}}
+                    </span>
+                </section>
+
+                {# 文本内容 #}
+                {%- for line in item.content.replace('。', '。|').replace('；', '；|').replace('，', '，|').split('|') -%}
+                    {%- if line.strip() -%}
+                    <section style="margin-bottom: 5px;">
+                        <p style="font-size: 17px; color: #333; line-height: 1.5; margin: 0;">
+                            {{- line -}}
+                        </p>
+                    </section>
+                    {%- endif -%}
+                {%- endfor -%}
+
+                {# 图片区域 #}
+                {%- if item.image -%}
+                <section style="margin-bottom: 10px;">
+                    <img src="{{ item.image }}" style="width: 100%; border-radius: 2px; display: block; object-fit: cover;">
+                </section>
+                {%- endif -%}
+
+                {# 发布时间 #}
+                <p style="font-size: 14px; color: #888; margin: 0;">
+                    <span>{{- loop.index -}} 分钟前</span>
+                </p>
+            </section>
+        </section>
+    </section>
+
+    {# 分隔线 #}
+    {%- if not loop.last -%}
+    <section style="height: 1px; background-color: #f1f1f1;"></section>
+    {%- endif -%}
+    {%- endfor -%}
+
+    {# 底部祝福语 #}
+    <section style="padding: 15px; text-align: center; color: #888; font-size: 14px;">
+        <section style="margin-bottom: 8px;">❤️ 愿所有美好如约而至 ❤️</section>
+        <section style="display: flex; justify-content: center; align-items: center;">
+            <span style="width: 50px; height: 1px; background: #ddd;"></span>
+            <span style="margin: 0 10px;">让世界充满爱</span>
+            <span style="width: 50px; height: 1px; background: #ddd;"></span>
+        </section>
+    </section>
+
+    <section style="border: 0px none;">
+        <section style="width: 100%;">
+            <section style="display: flex;justify-content: center;align-items: center;">
+                <section style="width: 4em;height: 1px;background: #b5d4fb;"></section>
+                <section style="width: 6px; height: 6px; background: rgb(181, 212, 251); border-radius: 100%;"></section>
+                <section style="width: 1em;"></section><section style="width: 23px;"><section style="width:23px;">
+                    <img style="width: 100%;display: block;" src="https://mmbiz.qpic.cn/mmbiz_png/Uh0Dc9Z24F5mJialLc7Hibc8I9EEibKk7AdlQrgkhdmDictJiaNicDsNfxOicGLkmnocuetbbeE0G43eo60kkH0bdXVxw/0"></section>
+                </section>
+                <section style="text-align: center; color: rgb(75, 142, 226); margin-left: 4px;">精彩推荐</section>
+                <section style="width: 1em;"></section>
+                <section style="width: 6px; height: 6px; background: rgb(181, 212, 251); border-radius: 100%;"></section>
+                <section style="width: 4em;height: 1px;background: #b5d4fb;"></section>
+            </section>
+            <section style="height:0.6em;"></section>
+            <section style="border-bottom: 1px dashed rgb(229, 229, 229); font-size: 14px; color: rgb(75, 142, 226); text-align: center; padding: 4px 1em;">三步打造你的专属商城</section>
+            <section style="border-bottom: 1px dashed rgb(229, 229, 229); font-size: 14px; color: rgb(75, 142, 226); text-align: center; padding: 4px 1em;">公众号迁移还有这种操作？</section>
+            <section style="border-bottom: 1px dashed rgb(229, 229, 229); font-size: 14px; color: rgb(75, 142, 226); text-align: center; padding: 4px 1em;">如何让服务号一个月群发N次消息？</section>
+        </section>
+    </section>
+</section> 

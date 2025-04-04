@@ -261,4 +261,4 @@ parameters:
 
 extra:
   python:
-    source: tools/baijiahao.py
+    source: tools/baijiahao/baijiahao.py

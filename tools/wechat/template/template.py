@@ -1,7 +1,7 @@
 import json
 from collections.abc import Generator
 from typing import Any
-from .template_manager import TemplateManager
+from tools.wechat.template.template_manager import TemplateManager
 
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
@@ -27,7 +27,8 @@ class TemplateTool(Tool):
             yield ToolInvokeMessage(
                 type="text",
                 message={
-                    "text": result
+                    "text": result,
+                    "json": result
                 }
             )
         except json.JSONDecodeError as e:

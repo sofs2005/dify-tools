@@ -1,10 +1,8 @@
 import requests
 import json
 import time
-import re
 from typing import Dict, Any, List, Optional
 from bs4 import BeautifulSoup
-from urllib.parse import urljoin
 
 class BaijiahaoPublisher:
     """百家号发布工具类 - 新版实现"""
@@ -39,6 +37,8 @@ class BaijiahaoPublisher:
                 cookie_dict[key] = value
         self.main_cookies = cookie_dict
         self.session.cookies.update(cookie_dict)
+
+        self.refresh_token()
         
     def refresh_token(self) -> str:
         """刷新认证token"""
@@ -118,7 +118,9 @@ class BaijiahaoPublisher:
                             title: str,
                             content: str) -> Dict[str, Any]:
         """保存文章为草稿"""
-            
+        
+        content = self.process_content_images(content)
+
         # 构建表单数据
         form_data = {
             'title': title,
@@ -159,6 +161,32 @@ class BaijiahaoPublisher:
             'draft_link': f'https://baijiahao.baidu.com/builder/rc/edit?type=news&article_id={article_id}'
         }
     
+    def process_content_images(self, content: str) -> str:
+        """
+        处理文章内容中的图片
+        1. 查找所有img标签
+        2. 上传图片
+        3. 替换图片URL
+        """
+        soup = BeautifulSoup(content, 'html.parser')
+        for img in soup.find_all('img'):
+            src = img.get('src')
+            if src and src.startswith('http'):
+                # 检查图片格式
+                lower_src = src.lower()
+                if not any(lower_src.endswith(ext) for ext in ['.jpg', '.jpeg', '.png']):
+                    raise Exception(f'不支持的图片格式，仅支持 jpg、jpeg、png 格式: {src}')
+                
+                # 上传图片
+                images = self.upload_image(src)
+                if images and images[0].get('url'):
+                    # 更新图片URL
+                    img['src'] = images[0]['url']
+                    # 确保有alt属性
+                    if not img.get('alt'):
+                        img['alt'] = '图片'
+        return str(soup)
+
     def publish_article(self, 
                        article_id: str,
                        title: str, 
@@ -186,6 +214,9 @@ class BaijiahaoPublisher:
             isBeautify: 是否美化图片 "true"-是 "false"-否
             usingImgFilter: 是否使用图片滤镜 "true"-是 "false"-否
         """
+        # 处理文章中的图片
+        content = self.process_content_images(content)
+        
         url = 'https://baijiahao.baidu.com/pcui/article/publish'
         
         # 默认封面图片
@@ -283,13 +314,13 @@ class BaijiahaoPublisher:
         )
         
         return response.json()
+            
         
-    def upload_image(self, image_source: str, is_url: bool = False) -> List[Dict[str, str]]:
+    def upload_image(self, image_source: str) -> List[Dict[str, str]]:
         """上传图片
         
         Args:
             image_source: 图片来源，可以是本地文件路径或URL
-            is_url: 是否是URL，默认为False
             
         Returns:
             上传结果列表
@@ -306,23 +337,45 @@ class BaijiahaoPublisher:
                 'article_type': 'news'
             }
             
-            if is_url:
-                # 如果是URL，直接使用URL上传
-                data['url'] = image_source
-                files = None
+            # 获取图片数据
+            if image_source.startswith('http'):
+                # 如果是URL，下载图片
+                headers = {
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+                }
+                img_response = requests.get(image_source, headers=headers, timeout=10)
+                img_response.raise_for_status()
+                image_data = img_response.content
+                content_type = img_response.headers.get('content-type', 'image/jpeg')
             else:
-                # 如果是本地文件，需要放在项目的 images 目录下
+                # 如果是本地文件
                 if not image_source.startswith('images/'):
                     image_source = f'images/{image_source}'
-                files = {
-                    'media': ('image.jpg', open(image_source, 'rb'), 'image/jpeg')
-                }
+                with open(image_source, 'rb') as f:
+                    image_data = f.read()
+                content_type = 'image/jpeg'  # 默认使用jpeg
+            
+            # 构建文件数据
+            files = {
+                'media': ('image.jpg', image_data, content_type)
+            }
+            
+            # 添加上传请求头
+            headers = {
+                'Accept': '*/*',
+                'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+                'Origin': 'https://baijiahao.baidu.com',
+                'Referer': 'https://baijiahao.baidu.com/builder/rc/edit',
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+                'X-Requested-With': 'XMLHttpRequest'
+            }
             
             # 发送请求
             response = self.session.post(
                 'https://baijiahao.baidu.com/pcui/picture/uploadproxy',
                 files=files,
-                data=data
+                data=data,
+                headers=headers
             )
             response.raise_for_status()
             result = response.json()

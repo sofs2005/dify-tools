@@ -2,7 +2,7 @@ from collections.abc import Generator
 from typing import Any
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
-from tools.baijiahao_publisher import BaijiahaoPublisher
+from tools.baijiahao.baijiahao_publisher import BaijiahaoPublisher
 
 class BaijiahaoTool(Tool):
     def __init__(self, **kwargs):
@@ -60,8 +60,7 @@ class BaijiahaoTool(Tool):
             # 保存文章
             save_result = publisher.save_article(
                 title=title,
-                content=content,
-                is_original=True
+                content=content
             )
             
             if auto_publish:
@@ -91,7 +90,8 @@ class BaijiahaoTool(Tool):
             yield ToolInvokeMessage(
                 type="text",
                 message={
-                    "text": f"文章《{title}》{status}\n文章ID：{result['article_id']}"
+                    "text": f"文章《{title}》{status}",
+                    "json": result
                 }
             )
             

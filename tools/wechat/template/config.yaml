@@ -25,6 +25,10 @@ parameters:
           zh_Hans: Hello Github 模板
           en_US: Hello Github Template
         value: hellogithub
+      - label: 
+          zh_Hans: moments 模板
+          en_US: moments Template
+        value: moments
   
   - name: template_params
     type: string
@@ -38,4 +42,4 @@ parameters:
       zh_Hans: 需要在模板中渲染的参数（JSON 格式）
 extra:
   python:
-    source: tools/template.py
+    source: tools/wechat/template/template.py

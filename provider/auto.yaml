@@ -11,9 +11,18 @@ identity:
     pt_BR: 自动化
   icon: guan.webp
 tools:
-  - tools/template.yaml
-  - tools/wechat.yaml
-  - tools/baijiahao.yaml
+  - tools/wechat/template/config.yaml
+  - tools/wechat/config.yaml
+  - tools/baijiahao/config.yaml
+  - tools/feishu/config.yaml
+  - tools/email/config.yaml
+  - tools/toutiao/config.yaml
+  - tools/juejin/config.yaml
+  - tools/juejin/category/config.yaml
+  - tools/juejin/tag/config.yaml
+  - tools/juejin/theme/config.yaml
+  - tools/juejin/column/config.yaml
+  - tools/jimeng/config.yaml
 extra:
   python:
     source: provider/auto.py

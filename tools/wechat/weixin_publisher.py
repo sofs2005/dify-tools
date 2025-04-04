@@ -3,29 +3,53 @@ import json
 import requests
 from datetime import datetime, timedelta
 from typing import Dict, Any, Optional
+import os
+from dotenv import load_dotenv
+
+# 加载 .env 文件
+load_dotenv()
 
 class WeixinPublisher:
     def __init__(self, app_id: str, app_secret: str):
         self.app_id = app_id
         self.app_secret = app_secret
-        self.access_token = None
-        self.token_expires_at = None
+        self.token_service_url = os.getenv('TOKEN_SERVICE_URL')
+        if not self.token_service_url:
+            raise ValueError("请在 .env 文件中设置 TOKEN_SERVICE_URL")
 
     def ensure_access_token(self) -> str:
-        """确保获取有效的access_token"""
-        if self.access_token and self.token_expires_at and self.token_expires_at > datetime.now() + timedelta(minutes=1):
-            return self.access_token
-
-        url = f"https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={self.app_id}&secret={self.app_secret}"
-        response = requests.get(url)
-        data = response.json()
-        
-        if 'access_token' not in data:
-            raise ValueError(f"获取access_token失败: {json.dumps(data)}")
-        
-        self.access_token = data['access_token']
-        self.token_expires_at = datetime.now() + timedelta(seconds=data['expires_in'])
-        return self.access_token
+        """从服务获取access_token"""
+        try:
+            # 构建请求参数
+            params = {
+                'app_id': self.app_id,
+                'app_secret': self.app_secret
+            }
+            
+            # 发送请求
+            response = requests.get(
+                self.token_service_url,
+                params=params,
+                timeout=10  # 设置超时时间
+            )
+            
+            # 检查响应状态码
+            if response.status_code != 200:
+                raise ValueError(f"Token服务响应错误: HTTP {response.status_code}")
+            
+            data = response.json()
+            
+            if not data.get('access_token'):
+                raise ValueError(f"获取access_token失败: {data}")
+            
+            return data['access_token']
+            
+        except requests.exceptions.Timeout:
+            raise ValueError("Token服务请求超时")
+        except requests.exceptions.RequestException as e:
+            raise ValueError(f"Token服务请求失败: {str(e)}")
+        except Exception as e:
+            raise ValueError(f"调用token服务失败: {str(e)}")
 
     def process_content_images(self, content: str) -> str:
         """处理文章内容中的图片"""
