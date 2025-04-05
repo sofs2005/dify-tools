@@ -13,7 +13,7 @@ parameters:
   - name: cookies
     type: string
     required: true
-    form: form
+    form: llm
     label:
       en_US: Baijiahao Cookies
       zh_Hans: 百家号 Cookies
