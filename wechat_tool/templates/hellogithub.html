@@ -1,0 +1,120 @@
+<section style="max-width: 100%; margin: 0 auto; padding: 15px; line-height: 1.8; color: #333; background: #fafbfc; font-family: Arial, sans-serif;">
+    <section style="font-size: 20px; font-weight: bold; text-align: center; margin: 20px 0; color: #1a1a1a;">
+        GitHub AI 相关热门仓库
+    </section>
+    
+    <p style="font-size: 14px; color: #666; text-align: center; margin-bottom: 20px;">
+        更新时间：{{ renderDate }}
+    </p>
+
+    <section style="margin: 16px 0; padding: 12px; background: #f8f9fa; border-radius: 8px; border: 1px solid #e9ecef;">
+        <section style="font-size: 15px; font-weight: bold; color: #1a1a1a; margin-bottom: 8px; padding-left: 8px; border-left: 3px solid #1890ff;">
+            📑 目录
+        </section>
+        {% for item in items %}
+        <section style="display: flex; align-items: center; gap: 6px; margin: 6px 0; padding: 4px; border-radius: 4px; background: {% if loop.index0 % 2 == 0 %}#fff{% else %}transparent{% endif %};">
+            <span style="display: inline-block; min-width: 16px; height: 16px; line-height: 16px; font-size: 12px; color: #fff; background: {% if loop.index0 < 3 %}{{ ['#ffb800', '#8091a5', '#b67f52'][loop.index0] }}{% else %}#8091a5{% endif %}; text-align: center; border-radius: 3px;">
+                {{ loop.index0 + 1 }}
+            </span>
+            <section style="flex: 1; display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+                <span style="font-size: 14px; font-weight: 500; color: #1a1a1a;">
+                    {{ item.name }}
+                </span>
+                <span style="font-size: 13px; color: #666; flex: 1; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                    {{ item.title }}
+                </span>
+            </section>
+        </section>
+        {% endfor %}
+    </section>
+
+    {% for item in items %}
+    <section style="margin-bottom: 25px; padding: 20px; border: 1px solid #eaeaea; border-radius: 8px; background: #fff; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);">
+        <section style="font-size: 18px; font-weight: bold; color: #1a1a1a; margin-bottom: 12px; display: flex; align-items: center;">
+            <span style="display: inline-block; min-width: 24px; padding: 4px 8px; margin-right: 8px; border-radius: 4px; font-size: 14px; color: #fff; background: {% if loop.index0 < 3 %}{{ ['#ffb800', '#8091a5', '#b67f52'][loop.index0] }}{% else %}#8091a5{% endif %}; text-align: center; box-shadow: 0 2px 4px {% if loop.index0 < 3 %}{{ ['rgba(255,184,0,0.2)', 'rgba(128,145,165,0.2)', 'rgba(182,127,82,0.2)'][loop.index0] }}{% else %}rgba(128,145,165,0.2){% endif %};">
+                {% if loop.index0 < 3 %}{{ ['🏆','🥈','🥉'][loop.index0] }}{% else %}{{ loop.index0 + 1 }}{% endif %}
+            </span>
+            {{ item.name }}
+        </section>
+
+        <p style="font-size: 15px; color: #666; margin: 12px 0; line-height: 1.6; padding: 12px 16px; text-align: justify; letter-spacing: 0.3px; background: #f8f9fa; border-radius: 6px; border-left: 4px solid #e9ecef;">
+            {{ item.title }}
+        </p>
+
+        <section style="display: flex; align-items: center; justify-content: space-between; font-size: 14px; margin: 12px 0; padding: 8px 12px; background: #fff9e6; border-radius: 6px; color: #d4a72c; border: 1px solid rgba(212, 167, 44, 0.2);">
+            <span style="font-weight: bold; font-size: 15px; display: flex; align-items: center;">
+                <span style="background: #ffd666; color: #874d00; padding: 2px 6px; border-radius: 4px; margin-right: 8px;">
+                    ⭐️
+                </span>
+                {{ item.totalStars }}
+            </span>
+            {% if item.lastWeekStars > 0 %}
+            <span style="padding: 2px 8px; background: #e8f5e9; border-radius: 4px; color: #4caf50; font-weight: bold; border: 1px solid rgba(76, 175, 80, 0.2); display: flex; align-items: center;">
+                <span style="background: #81c784; color: #1b5e20; padding: 2px 6px; border-radius: 4px; margin-right: 4px;">
+                    📈
+                </span>
+                本周新增 {{ item.lastWeekStars }}
+            </span>
+            {% endif %}
+        </section>
+
+        <section style="display: flex; align-items: center; gap: 16px; font-size: 14px; margin: 12px 0; padding: 8px 12px; background: #f0f7ff; border-radius: 6px; color: #4096ff;">
+            <span style="display: flex; align-items: center; padding: 4px 8px; background: rgba(24, 144, 255, 0.1); border-radius: 4px;">
+                👤：<span style="font-weight: 500; margin-left: 4px">
+                    {{ item.author }}
+                </span>
+            </span>
+            <span style="display: flex; align-items: center; padding: 4px 8px; background: rgba(24, 144, 255, 0.1); border-radius: 4px;">
+                💻：<span style="font-weight: 500; margin-left: 4px">
+                    {{ item.language }}
+                </span>
+            </span>
+        </section>
+
+        <p style="font-size: 15px; line-height: 1.6; color: #333; margin: 12px 0; padding: 12px 16px; background: #f6f8fa; border-radius: 6px; border-left: 4px solid #1890ff;">
+            {{ item.description }}
+        </p>
+
+        {% if item.tags and item.tags|length > 0 %}
+        <section style="margin: 12px 0; display: flex; flex-wrap: wrap; gap: 8px">
+            {% for tag in item.tags %}
+            <span style="display: inline-block; padding: 4px 8px; background: #f0f9f4; border-radius: 4px; color: #07c160; font-size: 13px;">
+                {{ tag }}
+            </span>
+            {% endfor %}
+        </section>
+        {% endif %}
+
+        <section style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #eaeaea;">
+            <p style="font-size: 14px; color: #07c160; margin-bottom: 8px">
+                📎 GitHub
+            </p>
+            <p style="font-size: 14px; color: #666; word-break: break-all">
+                {{ item.url }}
+            </p>
+
+            {% if item.relatedUrls and item.relatedUrls|length > 0 %}
+            <section style="margin-top: 12px">
+                <p style="font-size: 14px; color: #07c160; margin-bottom: 8px">
+                    🔗 相关链接
+                </p>
+                {% for link in item.relatedUrls %}
+                <section style="display: flex; align-items: center; gap: 8px; font-size: 14px; margin-bottom: 8px;">
+                    <span style="color: #333; white-space: nowrap">
+                        {{ link.title }}：
+                    </span>
+                    <span style="color: #666; word-break: break-all">
+                        {{ link.url }}
+                    </span>
+                </section>
+                {% endfor %}
+            </section>
+            {% endif %}
+        </section>
+    </section>
+    {% endfor %}
+
+    <p style="font-size: 14px; color: #666; text-align: center; margin-top: 20px">
+        数据来源：HelloGitHub
+    </p>
+</section>

@@ -1,0 +1,16 @@
+identity:
+  author: flowerwine
+  name: wechat_tool
+  label:
+    en_US: wechat tool
+    zh_Hans: 公众号工具
+  description:
+    en_US: wechat tool
+    zh_Hans: 公众号工具
+  icon: logo.png
+tools:
+  - tools/wechat.yaml
+  - tools/template.yaml
+extra:
+  python:
+    source: provider/wechat_tool.py

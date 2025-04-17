@@ -1,0 +1,19 @@
+identity:
+  author: flowerwine
+  name: juejin-dify-tool
+  label:
+    en_US: juejin-dify-tool
+    zh_Hans: 掘金工具
+  description:
+    en_US: juejin-dify-tool
+    zh_Hans: 掘金工具
+  icon: logo.png
+tools:
+  - tools/juejin.yaml
+  - tools/juejin_theme.yaml
+  - tools/juejin_tag.yaml
+  - tools/juejin_column.yaml
+  - tools/juejin_category.yaml
+extra:
+  python:
+    source: provider/juejin-dify-tool.py
