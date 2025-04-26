@@ -13,7 +13,7 @@ parameters:
   - name: template_id
     type: select
     required: true
-    form: llm
+    form: form
     label:
       en_US: Template ID
       zh_Hans: 模板ID

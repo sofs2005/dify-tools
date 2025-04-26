@@ -11,7 +11,7 @@ class TemplateTool(Tool):
         super().__init__(**kwargs)
         self.template_manager = TemplateManager()
 
-    def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
+    def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage, None, None]:
         template_id = tool_parameters.get('template_id')
         template_params_str = tool_parameters.get('template_params')
         

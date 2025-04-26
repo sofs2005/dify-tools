@@ -8,7 +8,7 @@ class JuejinTool(Tool):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         
-    def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
+    def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage, None, None]:
         cookies = tool_parameters.get('cookies')
         title = tool_parameters.get('title')
         content = tool_parameters.get('content')

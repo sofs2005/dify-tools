@@ -3,8 +3,13 @@ import json
 import requests
 from datetime import datetime, timedelta
 from typing import Dict, Any, Optional
+import os
+from dotenv import load_dotenv
 
-class WeixinPublisher:
+# 加载 .env 文件
+load_dotenv()
+
+class OfficialAccountPublisher:
     def __init__(self, app_id: str, app_secret: str, token_service_url: str):
         self.app_id = app_id
         self.app_secret = app_secret

@@ -39,10 +39,10 @@ parameters:
     form: llm
     label:
       en_US: Token Service URL
-      zh_Hans: 微信公众号 Token 服务地址
+      zh_Hans: 令牌服务 URL
     human_description:
-      en_US: Enter your WeChat Official Account Token Service URL，which is required to deploy a fixed IP Token Service due to the public account IP whitelist limitation.
-      zh_Hans: 输入你的微信公众号 Token 服务地址，由于公众号 IP 白名单的限制，所以需要自行部署一个 IP 固定的 Token 服务
+      en_US: Enter the URL of the token service
+      zh_Hans: 输入令牌服务 URL
     
   - name: title
     type: string
@@ -154,4 +154,4 @@ parameters:
 
 extra:
   python:
-    source: tools/wechat.py 
+    source: tools/official_account_tool.py 

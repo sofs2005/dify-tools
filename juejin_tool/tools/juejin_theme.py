@@ -51,7 +51,7 @@ class JuejinThemeTool(Tool):
         except Exception as e:
             raise Exception(f"获取话题列表失败: {str(e)}")
             
-    def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
+    def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage, None, None]:
         cookies = tool_parameters.get('cookies')
         cursor = tool_parameters.get('cursor', '0')
         limit = tool_parameters.get('limit', 10)

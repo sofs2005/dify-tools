@@ -1,12 +1,12 @@
 version: 0.0.1
 type: plugin
 author: flowerwine
-name: wechat_tool
+name: official_account_tool
 label:
-  en_US: wechat tool
+  en_US: official account tool
   zh_Hans: 公众号工具
 description:
-  en_US: wechat tool
+  en_US: official account tool
   zh_Hans: 公众号工具
 icon: logo.png
 resource:
@@ -24,7 +24,7 @@ resource:
       moderation: false
 plugins:
   tools:
-    - provider/wechat_tool.yaml
+    - provider/official_account_tool.yaml
 meta:
   version: 0.0.1
   arch:

@@ -2,14 +2,12 @@ identity:
   author: flowerwine
   name: jimeng-dify-tool
   label:
-    en_US: jimeng-dify-tool
-    zh_Hans: jimeng-dify-tool
-    pt_BR: jimeng-dify-tool
-  description:
-    en_US: 即梦工具
+    en_US: jimeng tool
     zh_Hans: 即梦工具
-    pt_BR: 即梦工具
-  icon: icon.svg
+  description:
+    en_US: jimeng tool
+    zh_Hans: 即梦工具
+  icon: logo.png
 tools:
   - tools/jimeng.yaml
 extra:
