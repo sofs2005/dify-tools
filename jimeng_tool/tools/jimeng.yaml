@@ -1,0 +1,119 @@
+identity:
+  name: jimeng
+  author: flowerwine
+  label:
+    en_US: Jimeng AI Image Generator
+    zh_Hans: 即梦AI绘画
+description:
+  human:
+    en_US: Generate images using Jimeng AI
+    zh_Hans: 使用即梦AI生成图片
+  llm: 使用即梦AI模型生成图片，支持多种模型和参数配置
+
+parameters:
+  - name: cookie
+    type: string
+    required: true
+    form: llm
+    label:
+      en_US: Jimeng Cookie
+      zh_Hans: 即梦 Cookie
+    human_description:
+      en_US: Enter your Jimeng website cookie
+      zh_Hans: 输入你的即梦网站 cookie
+
+  - name: prompt
+    type: string
+    required: true
+    form: llm
+    label:
+      en_US: Prompt
+      zh_Hans: 提示词
+    human_description:
+      en_US: Enter the prompt to generate image
+      zh_Hans: 输入生成图片的提示词
+
+  - name: model
+    type: select
+    required: false
+    form: llm
+    label:
+      en_US: Model
+      zh_Hans: 模型
+    human_description:
+      en_US: Select the AI model to use
+      zh_Hans: 选择要使用的AI模型
+    default: jimeng-2.1
+    options:
+      - label:
+          zh_Hans: 即梦2.1
+          en_US: Jimeng 2.1
+        value: jimeng-2.1
+      - label:
+          zh_Hans: 即梦2.0专业版
+          en_US: Jimeng 2.0 Pro
+        value: jimeng-2.0-pro
+      - label:
+          zh_Hans: 即梦2.0
+          en_US: Jimeng 2.0
+        value: jimeng-2.0
+      - label:
+          zh_Hans: 即梦1.4
+          en_US: Jimeng 1.4
+        value: jimeng-1.4
+      - label:
+          zh_Hans: 即梦XL专业版
+          en_US: Jimeng XL Pro
+        value: jimeng-xl-pro
+
+  - name: negative_prompt
+    type: string
+    required: false
+    form: llm
+    label:
+      en_US: Negative Prompt
+      zh_Hans: 反向提示词
+    human_description:
+      en_US: Enter negative prompt to avoid certain elements
+      zh_Hans: 输入反向提示词，用于避免生成某些元素
+    default: ""
+
+  - name: width
+    type: number
+    required: false
+    form: llm
+    label:
+      en_US: Width
+      zh_Hans: 宽度
+    human_description:
+      en_US: Image width (pixels)
+      zh_Hans: 图片宽度（像素）
+    default: 1024
+
+  - name: height
+    type: number
+    required: false
+    form: llm
+    label:
+      en_US: Height
+      zh_Hans: 高度
+    human_description:
+      en_US: Image height (pixels)
+      zh_Hans: 图片高度（像素）
+    default: 1024
+
+  - name: sample_strength
+    type: number
+    required: false
+    form: llm
+    label:
+      en_US: Sample Strength
+      zh_Hans: 采样强度
+    human_description:
+      en_US: Sampling strength (0.0-1.0)
+      zh_Hans: 采样强度（0.0-1.0）
+    default: 0.75
+
+extra:
+  python:
+    source: tools/jimeng.py

@@ -1,0 +1,39 @@
+version: 0.0.1
+type: plugin
+author: flowerwine
+name: official_account_tool
+label:
+  en_US: official account tool
+  zh_Hans: 公众号工具
+description:
+  en_US: official account tool
+  zh_Hans: 公众号工具
+icon: logo.png
+resource:
+  memory: 268435456
+  permission:
+    tool:
+      enabled: true
+    model:
+      enabled: true
+      llm: true
+      text_embedding: false
+      rerank: false
+      tts: false
+      speech2text: false
+      moderation: false
+plugins:
+  tools:
+    - provider/official_account_tool.yaml
+meta:
+  version: 0.0.1
+  arch:
+    - amd64
+    - arm64
+  runner:
+    language: python
+    version: "3.12"
+    entrypoint: main
+created_at: 2025-04-17T12:08:48.3629548+08:00
+privacy: PRIVACY.md
+verified: false

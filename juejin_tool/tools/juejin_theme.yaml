@@ -1,0 +1,51 @@
+identity:
+  name: juejin_theme
+  author: flowerwine
+  label:
+    en_US: Juejin Theme
+    zh_Hans: 掘金话题查询
+description:
+  human:
+    en_US: Get Juejin themes
+    zh_Hans: 获取掘金话题列表
+  llm: 获取掘金平台的热门话题列表
+parameters:
+  - name: cookies
+    type: string
+    required: true
+    form: llm
+    label:
+      en_US: Juejin Cookies
+      zh_Hans: 掘金 Cookies
+    human_description:
+      en_US: Enter your Juejin cookies
+      zh_Hans: 输入你的掘金 cookies
+    is_secret: true
+
+  - name: cursor
+    type: string
+    required: false
+    form: llm
+    label:
+      en_US: Cursor
+      zh_Hans: 分页游标
+    human_description:
+      en_US: Enter cursor for pagination
+      zh_Hans: 输入分页游标
+    default: "0"
+    
+  - name: limit
+    type: number
+    required: false
+    form: llm
+    label:
+      en_US: Page Size
+      zh_Hans: 每页数量
+    human_description:
+      en_US: Enter number of themes per page
+      zh_Hans: 输入每页显示的话题数量
+    default: 10
+
+extra:
+  python:
+    source: tools/juejin_theme.py

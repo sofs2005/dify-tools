@@ -1,0 +1,15 @@
+identity:
+  author: flowerwine
+  name: email_tool
+  label:
+    en_US: email tool
+    zh_Hans: 邮箱工具
+  description:
+    en_US: email tool
+    zh_Hans: 邮箱工具
+  icon: logo.png
+tools:
+  - tools/email.yaml
+extra:
+  python:
+    source: provider/email_dify_tool.py

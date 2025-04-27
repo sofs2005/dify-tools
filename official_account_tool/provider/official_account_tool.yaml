@@ -1,0 +1,16 @@
+identity:
+  author: flowerwine
+  name: official_account_tool
+  label:
+    en_US: official account tool
+    zh_Hans: 公众号工具
+  description:
+    en_US: official account tool
+    zh_Hans: 公众号工具
+  icon: logo.png
+tools:
+  - tools/official_account_tool.yaml
+  - tools/template.yaml
+extra:
+  python:
+    source: provider/official_account_tool.py

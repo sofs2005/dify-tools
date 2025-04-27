@@ -1,0 +1,15 @@
+identity:
+  author: flowerwine
+  name: jimeng-dify-tool
+  label:
+    en_US: jimeng tool
+    zh_Hans: 即梦工具
+  description:
+    en_US: jimeng tool
+    zh_Hans: 即梦工具
+  icon: logo.png
+tools:
+  - tools/jimeng.yaml
+extra:
+  python:
+    source: provider/jimeng-dify-tool.py

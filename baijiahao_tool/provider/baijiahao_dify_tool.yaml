@@ -1,0 +1,15 @@
+identity:
+  author: flowerwine
+  name: baijiahao_tool
+  label:
+    en_US: baijiahao tool
+    zh_Hans: 百家号工具
+  description:
+    en_US: baijiahao tool
+    zh_Hans: 百家号工具
+  icon: logo.png
+tools:
+  - tools/baijiahao.yaml
+extra:
+  python:
+    source: provider/baijiahao_dify_tool.py
